@@ -34,7 +34,7 @@ jobs:
                   context: ./
                   file: ./Dockerfile
                   push: true
-                  tags: baonx/tutorials-be:latest
+                  tags: taipham147/backend:latest
 
             - name: Pull and Run Docker Image
               id: build-deploy
@@ -43,7 +43,7 @@ jobs:
                   ssh-keyscan -H $SSH_ADDRESS  >> ~/.ssh/known_hosts
                   echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
-                  ssh ubuntu@$SSH_ADDRESS "docker pull baonx/tutorials-be:latest; 
+                  ssh ubuntu@$SSH_ADDRESS "docker pull taipham147/backend:latest; 
                   docker stop tutorials-be;
                   docker rm tutorials-be;
-                  docker run --name tutorials-be -e MYSQL_HOST=$MYSQL_HOST -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_USERNAME=$MYSQL_USERNAME  --log-driver awslogs --log-opt awslogs-region=ap-southeast-2 --log-opt awslogs-group='/baonx/tutorials-production' --log-opt awslogs-stream='tutorial-backend' --log-opt awslogs-create-group=true -dt -p 8080:8080 baonx/tutorials-be:latest"
+                  docker run --name tutorials-be -e MYSQL_HOST=$MYSQL_HOST -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_USERNAME=$MYSQL_USERNAME -dt -p 8080:8080 taipham147/backend:latest"
