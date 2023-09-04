@@ -46,4 +46,4 @@ jobs:
                   ssh ubuntu@$SSH_ADDRESS "docker pull taipham147/backend:latest; 
                   docker stop tutorials-be;
                   docker rm tutorials-be;
-                  docker run --name tutorials-be -e MYSQL_HOST=$MYSQL_HOST -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_USERNAME=$MYSQL_USERNAME -dt -p 8080:8080 taipham147/backend:latest"
+                  docker run --name tutorials-be -e MYSQL_HOST=$MYSQL_HOST -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_USERNAME=$MYSQL_USERNAME --log-driver awslogs --log-opt awslogs-region=ap-southeast-2 --log-opt awslogs-group='/taipt/tutorials-production' --log-opt awslogs-stream='tutorial-backend' --log-opt awslogs-create-group=true -dt -p 8080:8080 taipham147/backend:latest"
